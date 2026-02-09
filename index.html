@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yousef - Portfolio</title>
+
+  <!-- فونت سایت -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- آیکون‌ها -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* ------------------------------
+       رنگ‌ها و تم‌های کلی سایت
+    ------------------------------ */
+    :root {
+      --dark-bg: #0f2027;
+      --light-bg: #f4f4f4;
+      --text-dark: #fff;
+      --text-light: #000;
+      --primary: #00d2ff;
+      --card-dark: rgba(255, 255, 255, 0.06);
+    }
+
+    /* تم روشن */
+    [data-theme="light"] {
+      --bg: var(--light-bg);
+      --text: var(--text-light);
+      --card: white;
+    }
+
+    /* تم تاریک */
+    [data-theme="dark"] {
+      --bg: var(--dark-bg);
+      --text: var(--text-dark);
+      --card: var(--card-dark);
+    }
+
+    /* ریست پیش‌فرض‌ها */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.4s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ‌پس‌زمینه ذرات */
+    #particles-js {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      backdrop-filter: blur(5px);
+      z-index: -1;
+    }
+
+    /* ------------------------------
+       بخش قهرمان (Hero Section)
+    ------------------------------ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 30px;
+      background: var(--primary);
+      color: black;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .btn:hover { transform: scale(1.1); }
+
+    /* دکمه‌های تغییر زبان و تم */
+    .theme-toggle, .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--primary);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--primary);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .lang-toggle { right: 150px; }
+
+    .theme-toggle:hover, .lang-toggle:hover {
+      background: var(--primary);
+      color: black;
+    }
+
+    /* ------------------------------
+       بخش‌های داخلی سایت
+    ------------------------------ */
+    .section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .alt {
+      background: var(--card);
+      border-radius: 15px;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .tags span {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      margin: 0.4rem;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+
+    .tags span:hover {
+      background: var(--primary);
+      color: black;
+    }
+
+    /* ------------------------------
+       کارت‌های پروژه
+    ------------------------------ */
+    .projects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      padding: 1.5rem;
+      max-width: 300px;
+      border-radius: 10px;
+      transition: 0.3s;
+      text-align: left;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* ------------------------------ */
+    .hidden { display: none !important; }
+
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: gray;
+      font-size: 0.9rem;
+    }
+
+    /* رسپانسیو */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .lang-toggle { right: 160px; }
+    }
+  </style>
+</head>
+<body data-theme="dark" data-lang="en">
+
+<div id="particles-js"></div>
+<div class="overlay"></div>
+
+<!-- دکمه‌های تغییر زبان و تم -->
+<button class="lang-toggle" onclick="toggleLang()">Lang</button>
+<button class="theme-toggle" onclick="toggleTheme()">Theme</button>
+
+<!-- بخش قهرمان -->
+<section class="hero">
+  <h1><span id="typewriter"></span></h1>
+  <p>Software Engineering Student | Cybersecurity Enthusiast</p>
+  <a href="#about" class="btn">Explore</a>
+</section>
+
+<!-- بخش درباره من -->
+<section id="about" class="section alt">
+  <h2 class="en">About Me</h2>
+  <h2 class="fa hidden">درباره من</h2>
+
+  <ul style="list-style:none; margin-top:2rem;">
+    <li><b class="en">Birth Date:</b><b class="fa hidden">تولد:</b> April 22, 2005</li>
+    <li><b class="en">City:</b><b class="fa hidden">شهر:</b> Shahr-e-Kord</li>
+    <li><b class="en">Education:</b><b class="fa hidden">تحصیلات:</b> Software Engineering</li>
+  </ul>
+
+  <h2 class="en">Skills</h2>
+  <h2 class="fa hidden">مهارت‌ها</h2>
+
+  <p><b class="en">Languages:</b><b class="fa hidden">زبان‌ها:</b> Persian, English</p>
+  <p><b class="en">Favorite Langs:</b><b class="fa hidden">زبان‌های موردعلاقه:</b> JS, Python, Bash, C#</p>
+  
+  <h2 class="en">Hobbies</h2>
+  <h2 class="fa hidden">سرگرمی‌ها</h2>
+  <div class="tags">
+    <span><i class="fas fa-chess"></i> Chess</span>
+    <span><i class="fas fa-table-tennis"></i> Ping Pong</span>
+  </div>
+
+  <a href="resume.pdf" download class="btn" style="margin-top:2rem;">
+    <span class="en">Download Resume</span>
+    <span class="fa hidden">دانلود رزومه</span>
+  </a>
+</section>
+
+<!-- پروژه‌ها -->
+<section class="section">
+  <h2 class="en">Projects</h2>
+  <h2 class="fa hidden">پروژه‌ها</h2>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <h3>Note</h3>
+      <p>This website is an example of my works.</p>
+    </div>
+  </div>
+</section>
+
+<!-- تماس -->
+<section class="section alt">
+  <h2 class="en">Contact Me</h2>
+  <h2 class="fa hidden">ارتباط</h2>
+
+  <p>Telegram: <a href="https://t.me/zendanban_bot">@zendanban_bot</a></p>
+
+  <a href="tel:+989928123943" class="btn">Call Me</a>
+
+  <div class="tags" style="margin-top:1.5rem;">
+    <a href="https://github.com/godde3s"><i class="fab fa-github"></i></a>
+    <a href="https://t.me/zendanban_bot"><i class="fab fa-telegram"></i></a>
+  </div>
+</section>
+
+<footer class="footer">
+  Made with ❤️ by Yousef
+</footer>
+
+<!-- ------------------------------
+     انیمیشن تایپ (Typewriter)
+------------------------------ -->
+<script>
+  const texts = {
+    en: ["Hi, I'm Yousef 👋", "Welcome to my website."],
+    fa: ["سلام من یوسف هستم 👋", "به سایت من خوش آمدید."]
+  };
+
+  let i = 0, j = 0, current = "", lang = "en";
+
+  function type() {
+    lang = document.body.getAttribute("data-lang");
+    current = texts[lang][i];
+
+    document.querySelector("#typewriter").textContent = current.slice(0, ++j);
+
+    if (j === current.length) {
+      j = 0; i = (i + 1) % texts[lang].length;
+      setTimeout(type, 1500);
+    } else setTimeout(type, 90);
+  }
+  window.onload = type;
+</script>
+
+<!-- ------------------------------
+     تغییر زبان
+------------------------------ -->
+<script>
+  function toggleLang() {
+    const lang = document.body.getAttribute("data-lang");
+    const newLang = lang === "en" ? "fa" : "en";
+
+    document.querySelectorAll(".en, .fa").forEach(el => {
+      el.classList.toggle("hidden");
+    });
+
+    document.body.setAttribute("data-lang", newLang);
+  }
+</script>
+
+<!-- ------------------------------
+     تغییر تم (Dark/Light)
+------------------------------ -->
+<script>
+  function toggleTheme() {
+    const theme = document.body.getAttribute("data-theme");
+    document.body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+  }
+</script>
+
+<!-- پس‌زمینه پارتیکل -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    "particles": {
+      "number": { "value": 80, "density": { "enable": true, "value_area": 800 }},
+      "color": { "value": "#ffffff" },
+      "shape": { "type": "circle" },
+      "size": { "value": 3, "random": true },
+      "line_linked": { "enable": true, "distance": 150, "color": "#fff", "opacity": 0.4, "width": 1 }
+    },
+    "interactivity": {
+      "events": { "onhover": { "enable": true, "mode": "repulse" } }
+    }
+  });
+</script>
+
+</body>
+</html>
